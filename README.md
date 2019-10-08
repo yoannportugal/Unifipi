@@ -151,6 +151,21 @@ Once you press enter to these, the PiVPN script will tell Easy-RSA to generate t
 
 **Don't forget to forward the port in your router as per the tutorial (default OpenVPN port: 1194 UDP).**
 
+PiVPN does install and configure [Unnatended Upgrades](https://wiki.debian.org/UnattendedUpgrades)
+We should add unifi to it's blacklist so the controller is only updated manually (interactive installation and chance to do backup)
+
+To do so
+`sudo nano /etc/apt/apt.conf.d/50unattended-upgrades`
+
+and add `"ubiquiti";` after the following lines:
+````
+// Python regular expressions, matching packages to exclude from upgrading
+Unattended-Upgrade::Package-Blacklist {
+    // The following matches all packages starting with linux-
+//  "linux-";
+    "ubiquiti";
+````
+
 #### Now verify that both of them work independently:
 
 Connecting to the DNS server should blackhole common tracking domains such as google-analytics.com while allowing google.com)
@@ -238,6 +253,28 @@ And below the backup SD card: sda or mmcblk1 generally
 And finally, use rpi-clone
 
 `sudo rpi-clone sda -v`
+
+## Change PoE HAT Fan settings and turno off Wifi/Bluetooth
+
+`sudo nano /boot/config.txt`
+ 
+ and add the following lines
+ 
+````
+# POE Fan control
+dtparam=poe_fan_temp0=58000,poe_fan_temp0_hyst=13000
+dtparam=poe_fan_temp1=59000,poe_fan_temp1_hyst=2000
+
+# Turn wifi and bluetooth off
+#dtoverlay=disable-wifi
+dtoverlay=disable-bt
+````
+In this example, the fan kick in at 58 degrees and reduce the temperature of 13 degrees
+if temp goes over 59 the fan will speed up till it reduce the temperature of 2 degrees
+
+The bluetooth is disable at boot but wifi not selected
+
+
 
 
 
