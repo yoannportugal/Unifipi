@@ -129,7 +129,7 @@ Comment out both server declarations, `#server=1.1.1.1` and `#server=1.0.0.1`, a
 
 `sudo nano /etc/pihole/setupVars.conf`
 
-In here just comment out the 2 DNS addresses `#PIHOLE_DNS_1=1.1.1.1` and `#PIHOLE_DNS_2=1.0.0.1`. Once that's done you can restart the dnsmasq service with sudo systemctl restart dnsmasq.service and the Pi-Hole will now send DNS requests to cloudflared which is running as our DoH proxy.
+In here just comment out the 2 DNS addresses `#PIHOLE_DNS_1=1.1.1.1` and `#PIHOLE_DNS_2=1.0.0.1` and add `PIHOLE_DNS_1=127.0.0.1#54`. Once that's done you can restart the dnsmasq service with `sudo systemctl restart dnsmasq.service` and the Pi-Hole will now send DNS requests to cloudflared which is running as our DoH proxy.
 
 Check if DoH works with:
 
