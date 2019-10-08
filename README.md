@@ -4,6 +4,8 @@
 
 [rpi-clone Github repository](https://github.com/billw2/rpi-clone)
 
+Install by cloning repository
+
 ```
 cd ~/Downloads
 git clone https://github.com/billw2/rpi-clone.git 
