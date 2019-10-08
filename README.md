@@ -1,30 +1,5 @@
 # Unifipi
 
-## Backup the pi with `rpi-clone`
-
-[rpi-clone Github repository](https://github.com/billw2/rpi-clone)
-
-Install by cloning repository
-
-```
-cd ~/Downloads
-git clone https://github.com/billw2/rpi-clone.git 
-cd rpi-clone
-sudo cp rpi-clone rpi-clone-setup /usr/local/sbin
-```
-
-Then use fdisk to get the backup SD card name
-
-`sudo fdisk -l`
-
-You should see the current SD card: sda or mmcblk0 most of the time
-And below the backup SD card: sda or mmcblk1 generally
-
-And finally, use rpi-clone
-
-`sudo rpi-clone sda -v`
-
-
 ## Install Unifi
 
 - [Link lazyadmin.nl](https://lazyadmin.nl/home-network/installing-unifi-controller-on-a-raspberry-pi-in-5-min/)
@@ -239,6 +214,30 @@ Add the profile `*.ovpn`
 in `Settings` check [x] `Route all IPv4 traffic through the VPN`
 in `Advanced`, check [x] `Allow changes to manually-set network settings`
 
+
+## Backup the pi with `rpi-clone`
+
+[rpi-clone Github repository](https://github.com/billw2/rpi-clone)
+
+Install by cloning repository
+
+```
+cd ~/Downloads
+git clone https://github.com/billw2/rpi-clone.git 
+cd rpi-clone
+sudo cp rpi-clone rpi-clone-setup /usr/local/sbin
+```
+
+Then use fdisk to get the backup SD card name
+
+`sudo fdisk -l`
+
+You should see the current SD card: sda or mmcblk0 most of the time
+And below the backup SD card: sda or mmcblk1 generally
+
+And finally, use rpi-clone
+
+`sudo rpi-clone sda -v`
 
 
 
