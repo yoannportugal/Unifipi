@@ -254,7 +254,7 @@ And finally, use rpi-clone
 
 `sudo rpi-clone sda -v`
 
-## Change PoE HAT Fan settings and turno off Wifi/Bluetooth
+## Change PoE HAT Fan settings and turn off Wifi/Bluetooth
 
 `sudo nano /boot/config.txt`
  
