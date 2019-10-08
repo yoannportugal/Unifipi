@@ -152,12 +152,12 @@ Once you press enter to these, the PiVPN script will tell Easy-RSA to generate t
 **Don't forget to forward the port in your router as per the tutorial (default OpenVPN port: 1194 UDP).**
 
 PiVPN does install and configure [Unnatended Upgrades](https://wiki.debian.org/UnattendedUpgrades)
-We should add unifi to it's blacklist so the controller is only updated manually (interactive installation and chance to do backup)
+We should add `ubiquiti` to it's blacklist so the controller is only updated manually (interactive installation and chance to do backup)
 
-To do so
 `sudo nano /etc/apt/apt.conf.d/50unattended-upgrades`
 
 and add `"ubiquiti";` after the following lines:
+
 ````
 // Python regular expressions, matching packages to exclude from upgrading
 Unattended-Upgrade::Package-Blacklist {
@@ -269,10 +269,9 @@ dtparam=poe_fan_temp1=59000,poe_fan_temp1_hyst=2000
 #dtoverlay=disable-wifi
 dtoverlay=disable-bt
 ````
-In this example, the fan kick in at 58 degrees and reduce the temperature of 13 degrees
-if temp goes over 59 the fan will speed up till it reduce the temperature of 2 degrees
-
-The bluetooth is disable at boot but wifi not selected
+In this example, the fan kick in at 58 degrees and reduce the temperature of 13 degrees (45)
+if temp goes over 59 the fan will speed up till it reduce the temperature of 2 degrees (57) and goes back to normal speed.
+The bluetooth is disable at boot but wifi not selected.
 
 
 
