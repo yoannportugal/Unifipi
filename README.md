@@ -172,7 +172,7 @@ Connecting to the DNS server should blackhole common tracking domains such as go
 
 Remotely connecting to the VPN should allow you to see your home IP (I tested it using OpenVPN for android and disabling wifi; that way I should have a different public IP than my desktop, due to being on the mobile network. After connecting to the VPN I had the same public IP as my desktop -> OpenVPN works correctly).
 
-#### Final config - OpenVPN through Pi-Hole
+## Final config - OpenVPN through Pi-Hole
 [marcstan guide](https://marcstan.net/blog/2017/06/25/PiVPN-and-Pi-hole/)
 
 Now that OpenVPN and Pi-hole are both running independently it's time to connect them.
