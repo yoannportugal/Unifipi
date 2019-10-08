@@ -1,6 +1,4 @@
 # Unifipi
-Unifi-pi setup
-
 
 ## Backup the pi with `rpi-clone`
 
