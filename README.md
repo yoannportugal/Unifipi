@@ -166,6 +166,9 @@ Unattended-Upgrade::Package-Blacklist {
     "ubiquiti";
 ````
 
+Check if it works with log
+`sudo cat /var/log/unattended-upgrades/unattended-upgrades.log`
+
 #### Now verify that both of them work independently:
 
 Connecting to the DNS server should blackhole common tracking domains such as google-analytics.com while allowing google.com)
