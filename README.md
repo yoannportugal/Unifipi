@@ -223,7 +223,7 @@ Now connect via OpenVPN and check if DoH works with:
 
 ## Connect to OpenVPN with MacOS
 
-Use (Tunnelblick)[https://tunnelblick.net/]
+Use [Tunnelblick](https://tunnelblick.net/)
 
 Add the profile `*.ovpn`
 in `Settings` check [x] `Route all IPv4 traffic through the VPN`
