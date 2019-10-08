@@ -2,7 +2,7 @@
 Unifi-pi setup
 
 
-## **Backup the pi with `rpi-clone` **
+## Backup the pi with `rpi-clone`
 
 [rpi-clone Github repository](https://github.com/billw2/rpi-clone)
 
