@@ -257,7 +257,7 @@ And finally, use rpi-clone
 
 `sudo rpi-clone sda -v`
 
-## Change PoE HAT Fan settings and turn off Wifi/Bluetooth
+## Change PoE HAT Fan settings and turn off Wifi/Bluetooth & HDMI
 
 `sudo nano /boot/config.txt`
  
@@ -275,6 +275,8 @@ dtoverlay=disable-bt
 In this example, the fan kick in at 58 degrees and reduce the temperature of 13 degrees (45)
 if temp goes over 59 the fan will speed up till it reduce the temperature of 2 degrees (57) and goes back to normal speed.
 The bluetooth is disable at boot but wifi not selected.
+
+For HDMI edit `/etc/rc.local` and add `/usr/bin/tvservice -o` before `exit 0`
 
 
 
