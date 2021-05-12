@@ -265,15 +265,23 @@ And finally, use rpi-clone
  
 ````
 # POE Fan control
-dtparam=poe_fan_temp0=58000,poe_fan_temp0_hyst=13000
-dtparam=poe_fan_temp1=59000,poe_fan_temp1_hyst=2000
+dtoverlay=rpi-poe
+dtparam=poe_fan_temp0=60000
+dtparam=poe_fan_temp0_hyst=2000
+dtparam=poe_fan_temp1=62000
+dtparam=poe_fan_temp1_hyst=5000
+dtparam=poe_fan_temp2=70000
+dtparam=poe_fan_temp2_hyst=5000
+dtparam=poe_fan_temp3=80000
+dtparam=poe_fan_temp3_hyst=5000
+
 
 # Turn wifi and bluetooth off
 #dtoverlay=disable-wifi
 dtoverlay=disable-bt
 ````
-In this example, the fan kick in at 58 degrees and reduce the temperature of 13 degrees (45)
-if temp goes over 59 the fan will speed up till it reduce the temperature of 2 degrees (57) and goes back to normal speed.
+In this example, the fan kick in at 60 degrees and reduce the temperature of 2 degrees (58)
+if temp goes over 62 the fan will speed up till it reduce the temperature of 5 degrees (57) and goes back to normal speed. etc...
 The bluetooth is disable at boot but wifi not selected.
 
 For HDMI edit `/etc/rc.local` and add `/usr/bin/tvservice -o` before `exit 0`
