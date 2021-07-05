@@ -132,7 +132,7 @@ pi@raspberrypi:~ $ dig @127.0.0.1 -p 54 google.com
 google.com.             191     IN      A       172.217.22.14
 
 ;; Query time: 0 msec
-;; SERVER: 127.0.0.1#5053(127.0.0.1)
+;; SERVER: 127.0.0.1#54(127.0.0.1)
 ;; WHEN: Wed Dec 04 09:29:50 EET 2019
 ;; MSG SIZE  rcvd: 77
 ```
