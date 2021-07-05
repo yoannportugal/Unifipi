@@ -65,47 +65,77 @@ Go to your UniFi Controller via the IP address and port **https://192.168.x.x:84
 
 ## Install [Pi-hole](https://pi-hole.net/) with cloudfared DNS
 
-[Link scotthelme blog](https://scotthelme.co.uk/securing-dns-across-all-of-my-devices-with-pihole-dns-over-https-1-1-1-1/)
+[Link pihole cloudflared](https://docs.pi-hole.net/guides/dns/cloudflared/)
 
-#### Installing cloudflared
-We're not going to use the full potential of cloudflared but it does everything we need. We're going to use it as a DoH proxy and the first task is to get it installed and running.
 
-````
-cd ~
+armhf architecture (32-bit Raspberry Pi):
+
+Here we are downloading the precompiled binary and copying it to the /usr/local/bin/ directory to allow execution. Proceed to run the binary with the `-v` flag to check it is all working:
+
+```
 wget https://bin.equinox.io/c/VdrWdbjqyF/cloudflared-stable-linux-arm.tgz
-mkdir argo-tunnel
-tar -xvzf cloudflared-stable-linux-arm.tgz -C ./argo-tunnel
-rm cloudflared-stable-linux-arm.tgz
-cd argo-tunnel
-./cloudflared --version
-````
+tar -xvzf cloudflared-stable-linux-arm.tgz
+sudo cp ./cloudflared /usr/local/bin
+sudo chmod +x /usr/local/bin/cloudflared
+cloudflared -v
+```
+Note: Users have reported that the current version of cloudflared produces a segementation fault error on Raspberry Pi Zero W, Model 1B and 2B. As a workaround you can use an older version provided at [https://bin.equinox.io/a/4SUTAEmvqzB/cloudflared-2018.7.2-linux-arm.tar.gz](https://bin.equinox.io/a/4SUTAEmvqzB/cloudflared-2018.7.2-linux-arm.tar.gz) instead.
 
-#### Start cloudflared with the right config
+Proceed to create a configuration file for cloudflared in `/etc/cloudflared` named `config.yml`:
 
-`sudo ./cloudflared proxy-dns --port 54 --upstream https://1.1.1.1/.well-known/dns-query --upstream https://1.0.0.1/.well-known/dns-query`
+```
+sudo mkdir /etc/cloudflared/
+sudo nano /etc/cloudflared/config.yml
+```
+Copy the following configuration:
 
-#### Run cloudflared as a service
+```
+proxy-dns: true
+proxy-dns-port: 54
+proxy-dns-upstream:
+  - https://1.1.1.1/dns-query
+  - https://1.0.0.1/dns-query
+  #Uncomment following if you want to also want to use IPv6 for  external DOH lookups
+  #- https://[2606:4700:4700::1111]/dns-query
+  #- https://[2606:4700:4700::1001]/dns-query
+```
+Now install the service via cloudflared's service command:
 
-If everything is all setup and running just fine the last step is to make sure cloudflared is always running. To do this we will create a systemd unit file to make sure of that.
+```
+sudo cloudflared service install --legacy
+```
+Start the systemd service and check its status:
 
-`sudo nano /etc/systemd/system/dnsproxy.service`
-````
-[Unit]
-Description=CloudFlare DNS over HTTPS Proxy
-Wants=network-online.target
-After=network.target network-online.target
- 
-[Service]
-ExecStart=/home/pi/argo-tunnel/cloudflared proxy-dns --port 54 --upstream https://1.1.1.1/.well-known/dns-query --upstream https://1.0.0.1/.well-known/dns-query
-Restart=on-abort
- 
-[Install]
-WantedBy=multi-user.target
-````
+```
+sudo systemctl start cloudflared
+sudo systemctl status cloudflared
+```
+Now test that it is working! Run the following dig command, a response should be returned similar to the one below:
 
-To ensure cloudflared runs on startup you can enable it with the following.
+```
+pi@raspberrypi:~ $ dig @127.0.0.1 -p 54 google.com
 
-`sudo systemctl enable dnsproxy.service`
+; <<>> DiG 9.11.5-P4-5.1-Raspbian <<>> @127.0.0.1 -p 5053 google.com
+; (1 server found)
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 12157
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 4096
+; COOKIE: 22179adb227cd67b (echoed)
+;; QUESTION SECTION:
+;google.com.                    IN      A
+
+;; ANSWER SECTION:
+google.com.             191     IN      A       172.217.22.14
+
+;; Query time: 0 msec
+;; SERVER: 127.0.0.1#5053(127.0.0.1)
+;; WHEN: Wed Dec 04 09:29:50 EET 2019
+;; MSG SIZE  rcvd: 77
+```
 
 #### Install Pi-Hole
 
