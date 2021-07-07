@@ -137,6 +137,38 @@ google.com.             191     IN      A       172.217.22.14
 ;; MSG SIZE  rcvd: 77
 ```
 
+Manual Update:
+If you configured `cloudflared` using their `service install` command, then you can use the built in update command.
+
+```
+sudo cloudflared update
+sudo systemctl restart cloudflared
+```
+
+Automating Cloudflared Updates:
+
+If you want to have the system update cloudflared automatically, simply place the update commands for your configuration method in the file `/etc/cron.weekly/cloudflared-updater`, and adjust permissions:
+
+`sudo nano /etc/cron.weekly/cloudflared-updater`
+
+Copy the following configuration:
+```
+#!/bin/bash
+#
+# Clourdflared Updater cron weekly
+
+sudo cloudflared update
+sudo systemctl restart cloudflared
+```
+
+Adjust the permissions:
+```
+sudo chmod +x /etc/cron.weekly/cloudflared-updater
+sudo chown root:root /etc/cron.weekly/cloudflared-updater
+```
+The system will now attempt to update the cloudflared binary automatically, once per week.
+
+
 #### Install Pi-Hole
 
 `curl -sSL https://install.pi-hole.net | bash`
