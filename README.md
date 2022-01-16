@@ -53,7 +53,6 @@ We now have added the software to our list of available software and have the ab
 
 If you get problem with MongoDB:
 - [Link pimylifeup.com](https://pimylifeup.com/rasberry-pi-unifi/)
-- 
 
 
 #### 4. Cleanup MongoDB
