@@ -51,6 +51,10 @@ We now have added the software to our list of available software and have the ab
 
 ``sudo apt-get update; sudo apt-get install unifi -y``
 
+If you get problem with MongoDB:
+- [Link pimylifeup.com](https://pimylifeup.com/rasberry-pi-unifi/)
+- 
+
 
 #### 4. Cleanup MongoDB
 The installation may take a couple of minutes to complete. When done, we need to remove the default database that comes with MongoDB instance. This would only waste resources of our Pi, so we get rid of it:
