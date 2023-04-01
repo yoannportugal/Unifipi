@@ -59,6 +59,7 @@ If problem with Raspberry pi Kernel:
 
 Execute these lines of code:
 ``sudo sh -c 'echo "arm_64bit=0" >> /boot/config.txt'
+
 sudo reboot now``
 
 #### 4. Cleanup MongoDB
