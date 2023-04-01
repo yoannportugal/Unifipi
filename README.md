@@ -54,6 +54,12 @@ We now have added the software to our list of available software and have the ab
 If you get problem with MongoDB:
 - [Link pimylifeup.com](https://pimylifeup.com/rasberry-pi-unifi/)
 
+If problem with Raspberry pi Kernel:
+- [Link unifi forum](https://community.ui.com/questions/Step-By-Step-Tutorial-Guide-Raspberry-Pi-with-UniFi-Controller-and-Pi-hole-from-scratch-headless/e8a24143-bfb8-4a61-973d-0b55320101dc)
+
+Execute these lines of code:
+``sudo sh -c 'echo "arm_64bit=0" >> /boot/config.txt'
+sudo reboot now``
 
 #### 4. Cleanup MongoDB
 The installation may take a couple of minutes to complete. When done, we need to remove the default database that comes with MongoDB instance. This would only waste resources of our Pi, so we get rid of it:
